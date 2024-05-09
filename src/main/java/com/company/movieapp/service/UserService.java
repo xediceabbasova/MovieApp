@@ -106,7 +106,7 @@ public class UserService {
 
     }
 
-    private User findUserByMail(final String mail) {
+    protected User findUserByMail(final String mail) {
         return userRepository.findByMail(mail)
                 .orElseThrow(() -> new UserNotFoundException("User couldn't be found by following mail:" + mail));
     }

@@ -38,11 +38,13 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(x ->
                         x
+                                .requestMatchers(HttpMethod.GET, "/api/movies/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/v1/user").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.POST, "/v1/user", "v1/user/generateToken").permitAll()
                                 .requestMatchers("/v1/user/**").hasAnyRole("USER", "ADMIN")
                                 .requestMatchers(HttpMethod.GET, "/v1/movies", "v1/movies/**", "/v1/movies/details/**").permitAll()
                                 .requestMatchers("v1/movies/**", "v1/movies/details/**").hasRole("ADMIN")
+                                .requestMatchers("/forgotPassword/**").permitAll()
                 )
                 .sessionManagement(x -> x.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())

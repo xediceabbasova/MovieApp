@@ -30,6 +30,9 @@ public class User implements UserDetails {
     )
     private Set<Movie> movies = new HashSet<>();
 
+    @OneToOne(mappedBy = "user")
+    private ForgotPassword forgotPassword;
+
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "authorities", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)

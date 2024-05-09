@@ -62,6 +62,21 @@ public class GeneralExceptionAdviser extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(InvalidOtpException.class)
+    public ResponseEntity<?> invalidOtpException(InvalidOtpException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(OtpExpiredException.class)
+    public ResponseEntity<?> otpExpiredException(OtpExpiredException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.EXPECTATION_FAILED);
+    }
+
+    @ExceptionHandler(PasswordMismatchException.class)
+    public ResponseEntity<?> passwordMismatchExceptionHandler(PasswordMismatchException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.EXPECTATION_FAILED);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> generalExceptionHandler(Exception exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
